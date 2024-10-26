@@ -53,16 +53,18 @@ class ParserCombinator
       Items.new(super())
     end
 
-    def slice(nth)
-      if nth.instance_of? Range then
-        Items.new(super(nth))
-      else
-        super(nth)
+    def slice(*args)
+      case args.size
+      when 1
+        nth, = args
+        if nth.instance_of? Range then
+          Items.new(super(nth))
+        else
+          super(nth)
+        end
+      when 2
+        Items.new(super(*args))
       end
-    end
-
-    def slice(pos, len)
-      Items.new(super(pos, len))
     end
 
     def take(n)
