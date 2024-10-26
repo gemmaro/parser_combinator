@@ -210,7 +210,7 @@ class ParserCombinator
   end
 
   def self.fail(status=nil)
-    new{|i| Fail.new(status)}
+    new{Fail.new(status)}
   end
 
   def self.so_then(parser, &continuation_proc)
